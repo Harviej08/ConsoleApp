@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Runtime.ConstrainedExecution;
 
-public class Dice
+class Dice
 {
-    Random roll = new Random();
-
-    public void RollUntillSix()
+    static void Main(string[] args)
     {
+        Random roll = new Random();
+        RollUntillSix(roll);
+        OverHundred(roll);
+        ExactHundred(roll);
+        NumberRun(roll);
+    }
 
+    static void RollUntillSix(Random roll)
+    {
         int num = 0;
         bool check = false;
 
@@ -22,7 +28,7 @@ public class Dice
         Console.WriteLine($"You took {num} roll(s) to get a 6");
     }
 
-    public void OverHundred()
+    static void OverHundred(Random roll)
     {
         bool check = false;
         int num = 0;
@@ -40,7 +46,7 @@ public class Dice
         }
     }
 
-    public void ExactHundred()
+    static void ExactHundred(Random roll)
     {
         bool check = false;
         int game = 1;
@@ -62,13 +68,17 @@ public class Dice
         }
     }
 
-    public void NumberRun()
+    static void NumberRun(Random roll)
     {
         int num = 0;
         bool sequence = false;
         int finalRow = 1;
         int row = 0;
         Dictionary<int,int> numDict = new Dictionary<int, int>();
+        for (int i = 1;i <= 7; i++)
+        {
+            numDict.Add(i, 0);
+        }
 
         for (int i = 0; i < 100000; i++)
         {
@@ -97,9 +107,9 @@ public class Dice
             }
             numDict[num]++;
         }
-        for (int i = 0;i < 7; i++)
+        for (int i = 1;i < 7; i++)
         {
-            Console.WriteLine($"{i} showed up {numDict[i]} timesS");
+            Console.WriteLine($"{i} showed up {numDict[i]} times");
         }
     }
 }
